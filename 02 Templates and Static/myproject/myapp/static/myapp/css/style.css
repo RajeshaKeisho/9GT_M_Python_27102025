@@ -1,0 +1,19 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container{
+    text-align:  center; 
+    margin-top: 50px;
+}
+.h1{
+    color: #333;
+}
+
+p {
+    color: #666;
+    font-weight: 700;
+}
+img{
+    width: 30%;
+    height: auto;
+}
