@@ -1,0 +1,25 @@
+{% extends 'news/base.html' %}
+{% block title %}{{ category }} News - News Portal{% endblock %}
+
+{% block content %}
+{% load custom_filters %}
+
+<h2>{{ category|upper }}</h2>
+
+{% if news_list %}
+    <ul class="list-group">
+        {% for article in news_list %}
+            <li class="list-group-item">
+                <h5>{{ article.title|capfirst }}</h5>
+                <small class="text-muted">{{ article.date|date:"D, M d Y" }}</small>
+                
+                <p>{{ article.content|reverse_text }}</p>
+                <p>{{ article.content|uppercase_first }}</p>
+                
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No news available in this category.</p>
+{% endif %}
+{% endblock %}

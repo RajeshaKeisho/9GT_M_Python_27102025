@@ -1,0 +1,29 @@
+{% extends 'news/base.html' %}
+{% block title %}Home - News Portal{% endblock %}
+
+{% block content %}
+{% load custom_filters %}
+
+<div class="row">
+    {% for category, articles in news_data.items %}
+    <div class="col-md-4">
+        <h2>{{ category|title }}</h2>
+        <ul class="list-group">
+            {% for article in articles %}
+                <li class="list-group-item">
+                    <h5>{{ article.title|capfirst }}</h5>
+                    <small class="text-muted">{{ article.date|date:"D, M d Y" }}</small>
+                    
+                    <p>{{ article.content|truncatewords:10|highlight_word:"AI"|safe }}</p>
+                    
+                    <p><strong>Word Count:</strong> {{ article.content|wordcount }}</p>
+                    
+                    <a href="{% url 'category_news' category %}" class="btn btn-primary btn-sm">Read More</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
