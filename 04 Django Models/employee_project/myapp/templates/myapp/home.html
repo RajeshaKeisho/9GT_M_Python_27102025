@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            display: flex;
+            justihtfy-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        td, th{ht
+            padding: 20px 40px;
+            font-size: 2em;
+            font-weight: 600;
+        }
+       
+        
+    </style>
+
+</head>
+<body>
+     <div>
+    <h1>Employee Information</h1>
+    {% if emp_data %}
+    <table border="2px">
+        <thead>
+            <th>Eno</th>
+            <th>Ename</th>
+            <th>Esal</th>
+            <th>Eaddr</th>
+        </thead>
+        <tbody>
+            {% for emp in emp_data%}
+            <tr>
+                <td>{{emp.eno}}</td>
+                <td>{{emp.ename}}</td>
+                <td>{{emp.esal}}</td>
+                <td>{{emp.eaddr}}</td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No record is found</p>
+    {% endif %}
+ </div>
+
+</body>
+</html>
+
