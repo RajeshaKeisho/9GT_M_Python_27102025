@@ -1,0 +1,49 @@
+<!-- people/templates/people/customer_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer List</title>
+    <style>
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Customer List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Join Date</th>
+                <th>Is Loyal?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.phone_number }}</td>
+                <td>{{ customer.join_date }}</td>
+                <td>{% if customer.is_loyal %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

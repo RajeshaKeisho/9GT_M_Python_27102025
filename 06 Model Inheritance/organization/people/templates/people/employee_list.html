@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+    <style>
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Employee List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Position</th>
+                <th>Hire Date</th>
+                <th>Salary</th>
+                <th>Is Senior?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.phone_number }}</td>
+                <td>{{ employee.position }}</td>
+                <td>{{ employee.hire_date }}</td>
+                <td>{{ employee.salary }}</td>
+                <td>{% if employee.is_senior %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
