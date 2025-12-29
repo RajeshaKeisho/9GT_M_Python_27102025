@@ -1,0 +1,38 @@
+{% extends "library/base.html" %}
+{% block content %}
+
+<h2>ORM Queries Demonstration</h2>
+
+<h3>Cheap Books (&lt; ₹500)</h3>
+<ul>
+{% for b in cheap_books %}
+    <li>{{ b.title }} - ₹{{ b.price }}</li>
+{% endfor %}
+</ul>
+
+<h3>Q Object Books</h3>
+<ul>
+{% for b in q_books %}
+    <li>{{ b.title }}</li>
+{% endfor %}
+</ul>
+
+<h3>Aggregations</h3>
+<p>Average Price: ₹{{ avg_price.avg }}</p>
+<p>Maximum Price: ₹{{ max_price.max }}</p>
+
+<h3>Author Book Count</h3>
+<ul>
+{% for a in author_book_count %}
+    <li>{{ a.name }} - {{ a.total_books }} books</li>
+{% endfor %}
+</ul>
+
+<h3>Raw SQL Results</h3>
+<ul>
+{% for b in raw_books %}
+    <li>{{ b.0 }} - ₹{{ b.1 }}</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
