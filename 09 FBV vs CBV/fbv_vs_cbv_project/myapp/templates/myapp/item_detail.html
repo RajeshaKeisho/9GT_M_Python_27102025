@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ item.name }}</title>
+</head>
+<body>
+    <h1>{{ item.name }}</h1>
+    <p><strong>Category:</strong> {{ item.get_category_display }}</p>
+    <p><strong>Price:</strong> ${{ item.price }}</p>
+    <p><strong>Description:</strong> {{ item.description }}</p>
+    <p><strong>In Stock:</strong> {{ item.in_stock }}</p>
+    <p><strong>Created at:</strong> {{ item.created_at }}</p>
+    <p><strong>Last updated:</strong> {{ item.updated_at }}</p>
+    
+    <a href="{% url 'fbv_item_list' %}">Back to list</a>
+</body>
+</html>
