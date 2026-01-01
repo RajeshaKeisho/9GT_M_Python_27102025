@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{ theme }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body.light { background: white; color: black; }
+        body.dark { background: black; color: white; }
+    </style>
+</head>
+<body class="{{ theme }}">
+    <h1>Welcome, {{ username }}!</h1>
+    <p>Last Activity: {{ last_activity }}</p>
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        {% if username != 'Guest' %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+        <a href="{% url 'set_theme' %}">Set Theme</a>
+        <a href="{% url 'protected_view' %}">Protected Page</a>
+    </nav>
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</body>
+</html>
