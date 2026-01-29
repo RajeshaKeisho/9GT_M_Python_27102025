@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products List</title>
+    <link rel="stylesheet" href="{% static 'products/css/styles.css' %}">
+    <style>
+        /* styles.css */
+
+        /* Reset default margin and padding */
+        body, h1, form, table {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Form styling */
+        form {
+            margin-bottom: 20px;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        form input[type="text"],
+        form input[type="number"] {
+            padding: 5px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        form select {
+            padding: 5px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        form button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+
+        /* Pagination links */
+        .pagination {
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .pagination span {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Products List</h1>
+
+        <!-- Filter Form -->
+        <form method="GET" action="">
+            <label for="category">Category:</label>
+            <input type="text" name="category" id="category"><br>
+            <label for="brand">Brand:</label>
+            <input type="text" name="brand" id="brand"><br>
+            <label for="min_price">Min Price:</label>
+            <input type="number" name="min_price" id="min_price"><br>
+            <label for="max_price">Max Price:</label>
+            <input type="number" name="max_price" id="max_price">
+            <button type="submit">Filter</button>
+        </form>
+
+        <!-- Search Form -->
+        <form method="GET" action="">
+            <label for="search">Search:</label>
+            <input type="text" name="q" placeholder="Search products..." value="{{ search_query }}">
+    <button type="submit">Search</button>
+        </form>
+
+        <form method="get" class="form-inline mb-4">
+            <div class="form-group">
+                <label for="ordering">Order by:</label>
+                <select name="ordering" id="ordering" class="form-control ml-2">
+                    <option value="name" {% if request.GET.ordering == "name" %}selected{% endif %}>Name (A-Z)</option>
+                    <option value="-name" {% if request.GET.ordering == "-name" %}selected{% endif %}>Name (Z-A)</option>
+                    <option value="price" {% if request.GET.ordering == "price" %}selected{% endif %}>Price (Low to High)</option>
+                    <option value="-price" {% if request.GET.ordering == "-price" %}selected{% endif %}>Price (High to Low)</option>
+                    <option value="stock" {% if request.GET.ordering == "stock" %}selected{% endif %}>Stock (Low to High)</option>
+                    <option value="-stock" {% if request.GET.ordering == "-stock" %}selected{% endif %}>Stock (High to Low)</option>
+                </select>
+            <button type="submit" class="btn btn-primary ml-2">Sort</button>
+
+            </div>
+        </form>
+
+        <!-- Products Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Brand</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>${{ product.price }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.brand }}</td>
+                    <td>{{ product.stock }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination Links -->
+        <div class="pagination">
+            {% if products.has_previous %}
+                <a href="?page={{ products.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span>{{ products.number }}</span>
+            {% if products.has_next %}
+                <a href="?page={{ products.next_page_number }}">Next</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
